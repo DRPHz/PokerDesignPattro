@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 
 public class GameManager {
     private List<Player> players = new ArrayList<>();
@@ -40,7 +42,7 @@ public class GameManager {
         displayCommunityCards();
 
         for (int round = 1; round <= 4; round++) {
-            playRound();
+            playRound(round);  // Pass the current round number to AI for strategy
             if (cardsRevealed < 5) {
                 revealNextCommunityCard();
             } else {
@@ -51,7 +53,6 @@ public class GameManager {
         determineWinner();
         System.out.println("The game has ended!");
     }
-
 
     private void revealNextCommunityCard() {
         if (cardsRevealed < communityCards.size()) {
@@ -72,11 +73,15 @@ public class GameManager {
         System.out.println("]");
     }
 
-
-
-
-    private void playRound() {
+    private void playRound(int currentRound) {
         for (Player player : players) {
+            // Pass the current round to the AI strategy so it can adjust behavior
+            if (player instanceof AIPlayer) {
+                AIStrategy strategy = ((AIPlayer) player).getStrategy();
+                strategy = new DefensiveStrategy(player.getPrivateCards(), currentRound); // Update strategy based on round and cards
+                ((AIPlayer) player).setStrategy(strategy);
+            }
+
             player.playTurn();
             if (player instanceof HumanPlayer) {
                 System.out.println("Bot is deciding..");

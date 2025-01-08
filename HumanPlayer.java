@@ -19,6 +19,7 @@ public class HumanPlayer extends Player {
 
         if (input.equals("fold")) {
             System.out.println(name + " folded!");
+            System.out.println("You lost, the bot wins");
             System.exit(0); // End the game if the player folds
         }
     }
