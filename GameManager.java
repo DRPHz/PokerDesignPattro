@@ -42,7 +42,11 @@ public class GameManager {
         displayCommunityCards();
 
         for (int round = 1; round <= 4; round++) {
-            playRound(round);  // Pass the current round number to AI for strategy
+            boolean continueGame = playRound(round);
+            if (!continueGame) {
+                return; // Stop the game if the bot folds
+            }
+
             if (cardsRevealed < 5) {
                 revealNextCommunityCard();
             } else {
@@ -73,20 +77,25 @@ public class GameManager {
         System.out.println("]");
     }
 
-    private void playRound(int currentRound) {
+    private boolean playRound(int currentRound) {
         for (Player player : players) {
-            // Pass the current round to the AI strategy so it can adjust behavior
+            // Update bot strategy based on the round and cards
             if (player instanceof AIPlayer) {
-                AIStrategy strategy = ((AIPlayer) player).getStrategy();
-                strategy = new DefensiveStrategy(player.getPrivateCards(), currentRound); // Update strategy based on round and cards
-                ((AIPlayer) player).setStrategy(strategy);
-            }
+                AIPlayer botPlayer = (AIPlayer) player;
+                AIStrategy strategy = new DefensiveStrategy(player.getPrivateCards(), currentRound);
+                botPlayer.setStrategy(strategy);
 
-            player.playTurn();
-            if (player instanceof HumanPlayer) {
-                System.out.println("Bot is deciding..");
+                botPlayer.playTurn();
+                if ("fold".equals(botPlayer.getStrategy().decideAction())) {
+                    System.out.println(botPlayer.getName() + " folded!");
+                    System.out.println("The bot has folded. You win!");
+                    return false; // End the game immediately if the bot folds
+                }
+            } else {
+                player.playTurn();
             }
         }
+        return true; // Continue the game
     }
 
     public void determineWinner() {
