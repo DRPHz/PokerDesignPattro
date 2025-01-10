@@ -4,6 +4,8 @@
 
 Wij (Tigo de Rijk, Damian de Ruijter) hebben voor dit project gedaan aan pair programming.
 
+Link naar repository: https://github.com/DRPHz/PokerDesignPattro
+
 ## design patterns 
 Creational:
 1 Simpleton
