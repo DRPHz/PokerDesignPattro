@@ -7,8 +7,8 @@ Creational:
 2 Factory Method
 
 Structural:
-1
-2
+1 Composite Pattern
+2 Decorator Pattern
 
 Behavioral:
 1 Strategy Pattern
@@ -22,7 +22,7 @@ Het is private zodat andere classes geen nieuwe kunnen maken zodat er maar 1 bes
 getInstance() is een public static method die toegang geeft tot deze unieke instance van deck.
 
 Factory Method:  Factory zorgt er voor dat je een interface hebt voor het maken van objecten, maar de subclasses kunnen ieder een specifieke implementatie van die objecten bepalen.
-Onze factory maakt players met creatPlayer(), de subclasses HumanPlayerFactory en AIPlayerFactory implementeren deze methode op een specifieke manier voor die speler type.
+Onze factory maakt players met createPlayer(), de subclasses HumanPlayerFactory en AIPlayerFactory implementeren deze methode op een specifieke manier voor die speler type.
 Met de factory method verwijderen we wat complexiteit van het maken van spelers, en verminderen we code duplicatie
 
 
