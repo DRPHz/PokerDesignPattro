@@ -6,6 +6,9 @@ public class PokerGame {
         Player humanPlayer = humanFactory.createPlayer("You");
         Player aiPlayer = aiFactory.createPlayer("Bot");
 
+
+        humanPlayer = new LoggingPlayerDecorator(new StatisticsPlayerDecorator(humanPlayer));
+
         GameManager gameManager = new GameManager();
         gameManager.addPlayer(humanPlayer);
         gameManager.addPlayer(aiPlayer);
