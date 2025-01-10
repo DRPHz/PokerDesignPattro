@@ -29,3 +29,5 @@ Met de factory method verwijderen we wat complexiteit van het maken van spelers,
 
 Strategy Pattern: Het Strategy patroon maakt het mogelijk om verschillende algoritmes te bepalen en deze op een dynamische manier in de applicatie te gebruiken. In ons geval wordt dit gebruikt door de AIPlayer, die een variabele heeft die het huidige strategie object, zoals DefensiveStrategy bevat. Dit zorgt ervoor dat de AI zich op verschillende manieren kan gedragen afhankelijk van de gekozen strategie. Dit patroon zorgt voor meer flexibiliteit en onderhoudbaarheid, omdat je nieuwe strategieën kunt toevoegen zonder de bestaande code in de AIPlayer klasse te wijzigen. Ook vermindert dit code duplicatie voor als je nieuwe strategien wilt maken.
 De keuze voor een strategie kan verandert per situatie (zoals de huidige speelronde of hoe goed je hand is).
+
+
