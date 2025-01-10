@@ -21,3 +21,6 @@ Singleton:  Nou een simpleton zorgt er voor dat een class maar een instantie hee
 Het is private zodat andere classes geen nieuwe kunnen maken zodat er maar 1 bestaat.
 getInstance() is een public static method die toegang geeft tot deze unieke instance van deck.
 
+Factory Method:  Factory zorgt er voor dat je een interface hebt voor het maken van objecten, maar de subclasses kunnen ieder een specifieke implementatie van die objecten bepalen.
+Onze factory maakt players met creatPlayer(), de subclasses HumanPlayerFactory en AIPlayerFactory implementeren deze methode op een specifieke manier voor die speler type.
+Met de factory method verwijderen we wat complexiteit van het maken van spelers, en verminderen we code duplicatie
