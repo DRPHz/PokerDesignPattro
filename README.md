@@ -1,10 +1,14 @@
 # Terminal Poker
 
+Link naar repository: https://github.com/DRPHz/PokerDesignPattro
+
+Tigo de Rijk: TigoHZ
+
+Damian de Ruijter: DRPHZ
+
 ## samenwerking:
 
-Wij (Tigo de Rijk, Damian de Ruijter) hebben voor dit project gedaan aan pair programming.
-
-Link naar repository: https://github.com/DRPHz/PokerDesignPattro
+Wij hebben voor dit project gedaan aan pair programming.
 
 ## design patterns 
 Creational:
