@@ -1,12 +1,14 @@
-public class AIPlayerFactory extends PlayerFactory {
-    private AIStrategy strategy;
+import java.util.Random;
 
-    public AIPlayerFactory(AIStrategy strategy) {
-        this.strategy = strategy;
+public class AIPlayerFactory extends PlayerFactory {
+    private Random random;
+
+    public AIPlayerFactory() {
+        this.random = new Random();
     }
 
     @Override
     public Player createPlayer(String name) {
-        return new AIPlayer(name, strategy);
+        return new AIPlayer(name); // Strategy is set later in the game.
     }
 }

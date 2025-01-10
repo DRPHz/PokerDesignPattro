@@ -1,7 +1,7 @@
 public class PokerGame {
     public static void main(String[] args) {
         PlayerFactory humanFactory = new HumanPlayerFactory();
-        PlayerFactory aiFactory = new AIPlayerFactory(new AggressiveStrategy());
+        PlayerFactory aiFactory = new AIPlayerFactory();
 
         Player humanPlayer = humanFactory.createPlayer("You");
         Player aiPlayer = aiFactory.createPlayer("Bot");

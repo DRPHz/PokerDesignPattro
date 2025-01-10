@@ -1,6 +1,6 @@
 public class BotPlayer extends AIPlayer {
-    public BotPlayer(String name, AIStrategy strategy) {
-        super(name, strategy);
+    public BotPlayer(String name) {
+        super(name);
     }
 
     @Override

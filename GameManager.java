@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.util.Random;
 
 public class GameManager {
     private List<Player> players = new ArrayList<>();
@@ -79,12 +80,18 @@ public class GameManager {
 
     private boolean playRound(int currentRound) {
         for (Player player : players) {
-            // Update bot strategy based on the round and cards
             if (player instanceof AIPlayer) {
                 AIPlayer botPlayer = (AIPlayer) player;
-                AIStrategy strategy = new DefensiveStrategy(player.getPrivateCards(), currentRound);
-                botPlayer.setStrategy(strategy);
 
+                // Randomly choose a strategy: Aggressive or Defensive
+                AIStrategy strategy;
+                if (new Random().nextBoolean()) {
+                    strategy = new AggressiveStrategy();
+                } else {
+                    strategy = new DefensiveStrategy(player.getPrivateCards(), currentRound);
+                }
+                botPlayer.setStrategy(strategy);
+                // Play the AI's turn
                 botPlayer.playTurn();
                 if ("fold".equals(botPlayer.getStrategy().decideAction())) {
                     System.out.println(botPlayer.getName() + " folded!");
@@ -97,7 +104,6 @@ public class GameManager {
         }
         return true; // Continue the game
     }
-
     public void determineWinner() {
         // Combine private cards and community cards for the player and bot
         List<Card> playerHand = new ArrayList<>();
