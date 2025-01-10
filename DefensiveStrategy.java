@@ -1,39 +1,43 @@
-import java.util.List;  // Added import for List
+import java.util.List;
+import java.util.Random;
 
 public class DefensiveStrategy implements AIStrategy {
     private List<Card> privateCards;
-    private int currentTurn;
+    private int currentRound;
+    private Random random;
 
-    public DefensiveStrategy(List<Card> privateCards, int currentTurn) {
+    public DefensiveStrategy(List<Card> privateCards, int currentRound) {
         this.privateCards = privateCards;
-        this.currentTurn = currentTurn;
+        this.currentRound = currentRound;
+        this.random = new Random(); // Initialize the random number generator
     }
 
     @Override
     public String decideAction() {
-        // Check hand based on the current turn and hand strength
-        if (currentTurn > 0) {  // After the first round (including the Flop)
-            if (hasOnlyHighCard()) {
-                return Math.random() > 0.5 ? "fold" : "call"; // 50% chance to fold
+        // Evaluate the bot's hand strength
+        String handRank = HandEvaluator.evaluateHand(privateCards);
+
+        // Adjust the bot's behavior based on the round and hand strength
+        if (currentRound == 1) {
+            // Early game: less likely to fold unless the hand is really weak
+            if (isWeakHand(handRank)) {
+                return "call"; // Take a chance with weak hands early
+            }
+        } else {
+            // Mid to late game: cautious behavior with weak hands
+            if (isWeakHand(handRank)) {
+                // 20% chance to fold
+                if (random.nextInt(100) < 20) {
+                    return "fold";
+                }
+                return "call";
             }
         }
-        if (currentTurn > 1) {  // After the second round (including the Turn)
-            if (hasSinglePair()) {
-                return Math.random() > 0.5 ? "fold" : "call"; // 50% chance to fold
-            }
-        }
-        return "call"; // Default to calling if none of the conditions are met
+        return "call";
     }
 
-    private boolean hasOnlyHighCard() {
-        // Implement logic to determine if the bot has only a high card
-        // We'll use HandEvaluator here to determine if the hand is only a high card
-        return HandEvaluator.evaluateHand(privateCards).equals("High Card");
-    }
-
-    private boolean hasSinglePair() {
-        // Implement logic to determine if the bot has only a single pair
-        // We'll use HandEvaluator here to determine if the hand is a single pair
-        return HandEvaluator.evaluateHand(privateCards).equals("One Pair");
+    private boolean isWeakHand(String handRank) {
+        // Define weak hands: High Card is generally considered weak
+        return handRank.equals("High Card");
     }
 }
