@@ -91,6 +91,9 @@ public class GameManager {
                     strategy = new DefensiveStrategy(player.getPrivateCards(), currentRound);
                 }
                 botPlayer.setStrategy(strategy);
+
+                System.out.println(botPlayer.getName() + " is using strategy: " + strategy.getClass().getSimpleName());
+
                 // Play the AI's turn
                 botPlayer.playTurn();
                 if ("fold".equals(botPlayer.getStrategy().decideAction())) {
